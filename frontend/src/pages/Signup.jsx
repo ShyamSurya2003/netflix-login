@@ -15,13 +15,16 @@ function Signup({ setPage }) {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        "https://netflix-login-gmfg.onrender.com/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await res.json();
 
@@ -34,7 +37,7 @@ function Signup({ setPage }) {
         }, 1500);
       } else {
         setSuccess("");
-        setError(data.message);
+        setError(data.message || "Signup failed");
       }
     } catch (err) {
       console.error(err);
@@ -44,7 +47,7 @@ function Signup({ setPage }) {
 
   return (
     <div className="h-screen relative">
-
+      {/* Logo */}
       <h1
         className="absolute top-6 left-10 text-red-600 text-5xl tracking-widest drop-shadow-lg"
         style={{ fontFamily: "Bebas Neue" }}
@@ -52,16 +55,15 @@ function Signup({ setPage }) {
         NETFLIX
       </h1>
 
+      {/* Overlay */}
       <div className="flex items-center justify-center h-full bg-black/70">
-        <div className="bg-black/80 p-10 rounded w-[350px] text-white">
-
+        <div className="bg-black/80 p-10 rounded w-[350px] text-white shadow-2xl">
           <h1 className="text-3xl mb-6">Sign Up</h1>
 
           {error && <p className="text-red-500 mb-2">{error}</p>}
           {success && <p className="text-green-500 mb-2">{success}</p>}
 
           <form onSubmit={handleSignup} className="flex flex-col gap-4">
-
             <input
               type="email"
               placeholder="Email"
@@ -76,21 +78,20 @@ function Signup({ setPage }) {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="bg-red-600 py-3 rounded">
+            <button className="bg-red-600 py-3 rounded font-semibold">
               Sign Up
             </button>
           </form>
 
-          <p className="text-gray-400 mt-4">
+          <p className="text-gray-400 mt-4 text-sm">
             Already have an account?{" "}
             <span
               onClick={() => setPage("login")}
-              className="text-white cursor-pointer"
+              className="text-white cursor-pointer hover:underline"
             >
               Sign In
             </span>
           </p>
-
         </div>
       </div>
     </div>
