@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Netflix background */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("./assets/bg.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
